@@ -1,6 +1,69 @@
 import streamlit as st
 import numpy_financial as npf
 import pandas as pd
+
+try:
+    import locale
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+except locale.Error:
+    pass  # Fallback para formatação manual
+# ============================================
+# 1️⃣ PRIMEIRO: Configuração da página (OBRIGATÓRIO SER O PRIMEIRO)
+# ============================================
+st.set_page_config(
+    page_title="Valuation de Leilões GO", 
+    layout="wide", 
+    page_icon="🏛️"
+)
+
+# ============================================
+# 2️⃣ SEGUNDO: CSS Customizado (antes de renderizar qualquer elemento)
+# ============================================
+st.markdown("""
+<style>
+    /* Contenedor principal mais compacto */
+    .block-container {
+        padding-top: 1.5rem;
+        padding-bottom: 1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        max-width: 1100px;
+    }
+    
+    /* Reduzir fonte global */
+    html, body, [class*="css"] {
+        font-size: 14px;
+    }
+    
+    /* Títulos proporcionais */
+    h1 { font-size: 1.8rem; margin-bottom: 0.8rem; }
+    h2 { font-size: 1.4rem; margin-bottom: 0.6rem; margin-top: 0.8rem; }
+    h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+    
+    /* Métricas compactas */
+    [data-testid="stMetricValue"] { font-size: 1.3rem; }
+    [data-testid="stMetricLabel"] { font-size: 0.85rem; }
+    
+    /* Sidebar otimizada */
+    [data-testid="stSidebar"] {
+        min-width: 260px;
+        max-width: 280px;
+    }
+    
+    /* Espaçamento entre elementos */
+    .element-container { margin-bottom: 0.4rem; }
+    
+    /* Dividers */
+    hr { margin: 0.8rem 0; }
+    
+    /* Tabelas */
+    .dataframe { font-size: 0.85rem; }
+    
+    /* Info boxes */
+    .stAlert { padding: 0.8rem; font-size: 0.9rem; }
+</style>
+""", unsafe_allow_html=True)
+
 # Adicione no INÍCIO do código, logo após os imports
 def verificar_senha():
     """Retorna True se a senha estiver correta."""
@@ -41,11 +104,6 @@ def verificar_senha():
 if not verificar_senha():
     st.stop()
     
-try:
-    import locale
-    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-except locale.Error:
-    pass  # Fallback para formatação manual
 
 # Constantes para taxas e impostos
 TAXA_ITBI = 0.04
@@ -809,4 +867,5 @@ with st.expander("ℹ️ Informações e Premissas do Cálculo", expanded=False)
 st.divider()
 
 st.caption("💡 **Aviso:** Este simulador fornece estimativas baseadas nas informações fornecidas. Consulte profissionais especializados para análises detalhadas.")
+
 
