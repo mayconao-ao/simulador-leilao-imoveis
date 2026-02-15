@@ -1,7 +1,46 @@
 import streamlit as st
 import numpy_financial as npf
 import pandas as pd
+# Adicione no INÍCIO do código, logo após os imports
+def verificar_senha():
+    """Retorna True se a senha estiver correta."""
+    
+    def password_entered():
+        """Verifica se a senha inserida está correta."""
+        if st.session_state["password"] == "sua_senha_aqui":
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # Não armazenar a senha
+        else:
+            st.session_state["password_correct"] = False
 
+    if "password_correct" not in st.session_state:
+        # Primeira vez, mostrar input de senha
+        st.text_input(
+            "🔐 Senha de Acesso:", 
+            type="password", 
+            on_change=password_entered, 
+            key="password"
+        )
+        st.info("ℹ️ Digite a senha para acessar o simulador.")
+        return False
+    elif not st.session_state["password_correct"]:
+        # Senha incorreta
+        st.text_input(
+            "🔐 Senha de Acesso:", 
+            type="password", 
+            on_change=password_entered, 
+            key="password"
+        )
+        st.error("❌ Senha incorreta. Tente novamente.")
+        return False
+    else:
+        # Senha correta
+        return True
+
+# Verificar senha antes de mostrar o app
+if not verificar_senha():
+    st.stop()
+    
 try:
     import locale
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -768,4 +807,5 @@ with st.expander("ℹ️ Informações e Premissas do Cálculo", expanded=False)
 
 # Rodapé
 st.divider()
+
 st.caption("💡 **Aviso:** Este simulador fornece estimativas baseadas nas informações fornecidas. Consulte profissionais especializados para análises detalhadas.")
