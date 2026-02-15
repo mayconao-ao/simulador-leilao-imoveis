@@ -563,7 +563,7 @@ entrada_pct = st.sidebar.slider("% de Entrada (Financiamento)", 0, 100, 20, help
 st.sidebar.subheader("🏦 Parâmetros de Financiamento")
 considerar_juros = st.sidebar.checkbox("Considerar Custos de Financiamento", value=True, help="Incluir juros do financiamento na análise")
 taxa_juros_anual = st.sidebar.number_input("Taxa de Juros Anual (%)", value=12.0, step=0.5, min_value=0.0, help="Taxa de juros anual do financiamento") / 100 if considerar_juros else 0.12
-prazo_financiamento_meses = st.sidebar.slider("Prazo do Financiamento (Meses)", 1, 360, 120, help="Prazo para quitação do financiamento bancário") if considerar_juros else meses
+prazo_financiamento_meses = st.sidebar.slider("Prazo do Financiamento (Meses)", 1, 420, 120, help="Prazo para quitação do financiamento bancário") if considerar_juros else meses
 
 st.sidebar.subheader("💸 Custos de Venda")
 quem_paga_custos_venda = st.sidebar.selectbox("Quem Paga os Custos de Venda?", ["Vendedor", "Comprador"], index=0, help="Define quem arca com comissão e taxas de venda")
@@ -867,5 +867,6 @@ with st.expander("ℹ️ Informações e Premissas do Cálculo", expanded=False)
 st.divider()
 
 st.caption("💡 **Aviso:** Este simulador fornece estimativas baseadas nas informações fornecidas. Consulte profissionais especializados para análises detalhadas.")
+
 
 
