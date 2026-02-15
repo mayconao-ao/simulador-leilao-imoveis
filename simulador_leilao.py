@@ -7,7 +7,7 @@ def verificar_senha():
     
     def password_entered():
         """Verifica se a senha inserida está correta."""
-        if st.session_state["password"] == "sua_senha_aqui":
+        if st.session_state["password"] == "investimento":
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # Não armazenar a senha
         else:
@@ -809,3 +809,4 @@ with st.expander("ℹ️ Informações e Premissas do Cálculo", expanded=False)
 st.divider()
 
 st.caption("💡 **Aviso:** Este simulador fornece estimativas baseadas nas informações fornecidas. Consulte profissionais especializados para análises detalhadas.")
+
